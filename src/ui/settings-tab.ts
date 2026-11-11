@@ -53,7 +53,7 @@ export class FlashcardsSettingTab extends PluginSettingTab {
 		super(app, plugin);
 	}
 
-	private get plugin(): SettingsHost {
+	private get host(): SettingsHost {
 		return this.pluginHost;
 	}
 
@@ -81,9 +81,9 @@ export class FlashcardsSettingTab extends PluginSettingTab {
 		const next = coerceValue(spec, value);
 		if (next === undefined) return;
 
-		(this.plugin.settings as unknown as Record<string, unknown>)[key] = next;
-		void this.plugin.saveSettings();
-		if (key === 'baseTag') this.plugin.scheduleRebuild();
+		(this.host.settings as unknown as Record<string, unknown>)[key] = next;
+		void this.host.saveSettings();
+		if (key === 'baseTag') this.host.scheduleRebuild();
 	}
 
 	private groupDefinition(group: SettingGroupSpec): SettingDefinitionGroup {
@@ -145,7 +145,7 @@ export class FlashcardsSettingTab extends PluginSettingTab {
 	}
 
 	private maintenanceDefinition(): SettingDefinitionGroup {
-		const { baseTag, newCardsPerDay, reviewsPerDay } = this.plugin.settings;
+		const { baseTag, newCardsPerDay, reviewsPerDay } = this.host.settings;
 		return {
 			type: 'group',
 			heading: 'Maintenance',
@@ -252,7 +252,7 @@ export class FlashcardsSettingTab extends PluginSettingTab {
 			)
 			.addButton((button) =>
 				button.setButtonText('Reset').onClick(async () => {
-					await this.plugin.resetSettings();
+					await this.host.resetSettings();
 					this.display();
 				}),
 			);
@@ -267,7 +267,7 @@ export class FlashcardsSettingTab extends PluginSettingTab {
 			text: '<!-- fc-srs {"v":1,"id":"a1b2c3","cards":{"fwd":{...}}} -->',
 		});
 
-		const { baseTag, newCardsPerDay, reviewsPerDay } = this.plugin.settings;
+		const { baseTag, newCardsPerDay, reviewsPerDay } = this.host.settings;
 		containerEl.createEl('p', {
 			cls: 'setting-item-description',
 			text: `Base tag: #${baseTag} · New/day: ${newCardsPerDay} · Reviews/day: ${reviewsPerDay}`,
@@ -277,7 +277,7 @@ export class FlashcardsSettingTab extends PluginSettingTab {
 	// --- Shared helpers --------------------------------------------------------
 
 	private read(key: string): unknown {
-		return (this.plugin.settings as unknown as Record<string, unknown>)[key];
+		return (this.host.settings as unknown as Record<string, unknown>)[key];
 	}
 
 	private readBoolean(key: string): boolean {
@@ -285,7 +285,7 @@ export class FlashcardsSettingTab extends PluginSettingTab {
 	}
 
 	private async reset(): Promise<void> {
-		await this.plugin.resetSettings();
+		await this.host.resetSettings();
 		// `update()` is declarative-settings only (Obsidian 1.13+); older
 		// versions still render through `display()`.
 		if (typeof this.update === 'function') {
