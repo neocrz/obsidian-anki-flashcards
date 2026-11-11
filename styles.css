@@ -284,10 +284,6 @@
 	line-height: 1.55;
 }
 
-.fc-card-content p {
-	white-space: pre-wrap;
-}
-
 .fc-card-content > :first-child {
 	margin-top: 0;
 }
