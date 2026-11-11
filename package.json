@@ -1,0 +1,45 @@
+{
+	"name": "anki-flashcards",
+	"version": "0.1.0",
+	"description": "Anki-style spaced repetition flashcards for Obsidian notes.",
+	"main": "main.js",
+	"type": "module",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"build": "npm run typecheck && npm run build:only",
+		"build:only": "node esbuild.config.mjs production",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"lint": "eslint .",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"validate": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run build:only",
+		"version": "node version-bump.mjs && git add manifest.json versions.json"
+	},
+	"keywords": [
+		"obsidian",
+		"flashcards",
+		"anki",
+		"spaced-repetition",
+		"srs"
+	],
+	"license": "MIT",
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"@types/node": "^26.6.6",
+		"esbuild": "^0.28.2",
+		"eslint": "^10.14.0",
+		"eslint-plugin-obsidianmd": "^0.5.1",
+		"globals": "^17.14.0",
+		"jiti": "^2.6.1",
+		"obsidian": "^1.14.4",
+		"prettier": "^3.10.0",
+		"typescript": "~5.9.3",
+		"typescript-eslint": "^8.72.2",
+		"vitest": "^5.1.0"
+	},
+	"allowScripts": {
+		"esbuild@0.28.2": true
+	}
+}

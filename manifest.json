@@ -1,0 +1,9 @@
+{
+	"id": "anki-flashcards",
+	"name": "Anki Flashcards",
+	"version": "0.1.0",
+	"minAppVersion": "1.5.0",
+	"description": "Turn tagged notes into Anki-style flashcards with learning steps, ease factors, lapses, and fuzzed intervals.",
+	"author": "nil",
+	"isDesktopOnly": false
+}

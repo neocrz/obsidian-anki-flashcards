@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"inlineSourceMap": true,
+		"inlineSources": true,
+		"module": "ESNext",
+		"target": "ES2022",
+		"strict": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"moduleResolution": "node",
+		"isolatedModules": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"lib": ["ES2022", "DOM", "DOM.Iterable"],
+		"types": ["node"]
+	},
+	"include": ["src/**/*.ts", "tests/**/*.ts", "vitest.config.ts"]
+}
