@@ -23,6 +23,8 @@ export interface FlashcardSettings {
 	fuzz: boolean;
 	newCardsPerDay: number;
 	reviewsPerDay: number;
+	/** Collapse the plugin's hidden review-data lines to a small badge in Live Preview. */
+	compactReviewData: boolean;
 }
 
 export const DEFAULT_SETTINGS: FlashcardSettings = {
@@ -43,6 +45,7 @@ export const DEFAULT_SETTINGS: FlashcardSettings = {
 	fuzz: true,
 	newCardsPerDay: 20,
 	reviewsPerDay: 200,
+	compactReviewData: true,
 };
 
 export function normalizeBaseTag(value: string): string {
@@ -109,6 +112,10 @@ export function normalizeSettings(raw: unknown): FlashcardSettings {
 		reviewsPerDay: Math.round(
 			clamped(data.reviewsPerDay, DEFAULT_SETTINGS.reviewsPerDay, 0, 100000),
 		),
+		compactReviewData:
+			typeof data.compactReviewData === 'boolean'
+				? data.compactReviewData
+				: DEFAULT_SETTINGS.compactReviewData,
 	};
 }
 

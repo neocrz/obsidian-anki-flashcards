@@ -4,6 +4,8 @@ import { parseIsoDate } from '../utils/dates';
 
 const STATE_VALUES = new Set(['new', 'learning', 'review', 'relearning']);
 
+const METADATA_LINE_START = new RegExp(`^\\s*<!--\\s*${METADATA_MARKER}\\b`);
+
 function asFiniteNumber(value: unknown): number | undefined {
 	return typeof value === 'number' && Number.isFinite(value) ? value : undefined;
 }
@@ -36,7 +38,7 @@ export function keyToDirection(key: MetadataDirection): CardDirection {
 }
 
 export function isMetadataLineLike(line: string): boolean {
-	return new RegExp(`^\\s*<!--\\s*${METADATA_MARKER}\\b`).test(line);
+	return METADATA_LINE_START.test(line);
 }
 
 export function parseMetadataLine(line: string): NoteMetadataData | null {

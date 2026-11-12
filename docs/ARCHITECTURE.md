@@ -150,6 +150,15 @@ each answer, so no duplicate copy of scheduling state exists.
 The view subscribes to `CardStore` events for deck-browser refreshes. Review sessions do not re-render
 on unrelated file changes; the current card stays stable. Timers are cleared in `onClose`.
 
+### Review-data lines in the editor
+
+`ui/metadata-decorations.ts` registers a CodeMirror `ViewPlugin` that replaces lines recognised by
+`isMetadataLineLike()` (the plugin's own `<!-- fc-srs ... -->` comments) with a tiny badge while in
+Live Preview. Other HTML comments and Source mode are untouched. When the cursor or a selection
+touches the line, the raw comment is shown again so it stays editable. The `compactReviewData`
+setting (default on) turns this off; `refreshMetadataDecorations()` makes open editors rebuild after
+a settings change. The line itself is never modified, so parsing and writes are unaffected.
+
 ## Extension points
 
 - **New syntax:** add to `model/parser.ts` and `docs/PARSING.md`, then tests.

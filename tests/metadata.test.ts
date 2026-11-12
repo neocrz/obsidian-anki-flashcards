@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
 	defaultSchedule,
 	directionToKey,
+	isMetadataLineLike,
 	mergeSchedule,
 	metadataToLine,
 	parseMetadataLine,
@@ -117,5 +118,23 @@ describe('metadata lines', () => {
 	it('accepts extra whitespace', () => {
 		const line = '  <!--   fc-srs   {"v":1,"id":"x","cards":{}}   -->  ';
 		expect(parseMetadataLine(line)?.id).toBe('x');
+	});
+});
+
+describe('metadata line detection', () => {
+	it('only matches comments that start with the plugin marker', () => {
+		const cases: Array<[string, boolean]> = [
+			['<!-- fc-srs {"v":1,"id":"x","cards":{}} -->', true],
+			['  <!--fc-srs {"v":1} -->', true],
+			['<!-- fc-srs-extra -->', true],
+			['<!-- fc-srsx -->', false],
+			['<!-- comment -->', false],
+			['text before <!-- fc-srs -->', false],
+			['', false],
+		];
+
+		for (const [line, expected] of cases) {
+			expect(isMetadataLineLike(line), line).toBe(expected);
+		}
 	});
 });

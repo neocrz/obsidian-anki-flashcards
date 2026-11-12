@@ -97,6 +97,7 @@ from Anki (for example, due times are exact timestamps rather than day-indexed r
 - Graduating/easy intervals
 - Starting/minimum ease, hard factor, easy bonus, interval modifier, lapse multiplier
 - Maximum interval, leech threshold/action, fuzz on/off
+- Compact review-data lines in Live Preview (on by default)
 
 ## Development
 

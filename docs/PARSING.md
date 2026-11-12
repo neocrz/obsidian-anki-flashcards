@@ -133,5 +133,7 @@ Every reviewed card gets a hidden HTML comment immediately after its last conten
 - No per-card tags/decks.
 - Inline separators inside inline code are ignored; inside fenced code the whole block is ignored.
 - An orphaned metadata line (card deleted) is harmless and is not rendered.
-- Metadata is an HTML comment, so it is hidden in reading view but visible in source mode. Do not edit
-  it by hand unless you understand the fields; malformed lines are treated as "new card".
+- Metadata is an HTML comment, so it is hidden in reading view but visible in source mode. In Live
+  Preview it is collapsed to a small `fc-srs` badge by default; place the cursor on the line to see
+  the raw comment. Do not edit it by hand unless you understand the fields; malformed lines are
+  treated as "new card".

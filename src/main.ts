@@ -4,6 +4,7 @@ import { CardStore } from './data/card-store';
 import type { FlashcardHost, SettingsHost } from './host';
 import { DEFAULT_SETTINGS, normalizeSettings, type FlashcardSettings } from './settings';
 import { FlashcardView } from './ui/flashcard-view';
+import { metadataLineDecorations, refreshMetadataDecorations } from './ui/metadata-decorations';
 import { FlashcardsSettingTab } from './ui/settings-tab';
 
 interface AppWithSettings extends App {
@@ -45,6 +46,7 @@ export default class AnkiFlashcardsPlugin extends Plugin implements FlashcardHos
 		});
 
 		this.addSettingTab(new FlashcardsSettingTab(this.app, this, this));
+		this.registerEditorExtension(metadataLineDecorations(() => this.settings));
 		this.registerVaultEvents();
 
 		this.app.workspace.onLayoutReady(() => {
@@ -85,6 +87,7 @@ export default class AnkiFlashcardsPlugin extends Plugin implements FlashcardHos
 
 	async saveSettings(): Promise<void> {
 		await this.saveData(this.settings);
+		refreshMetadataDecorations();
 		this.store.notifyChanged();
 	}
 

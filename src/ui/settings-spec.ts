@@ -21,7 +21,7 @@ export type NumericSettingKey =
 	| 'reviewsPerDay';
 
 export type TextSettingKey = 'baseTag' | 'learningSteps' | 'relearningSteps';
-export type ToggleSettingKey = 'fuzz';
+export type ToggleSettingKey = 'fuzz' | 'compactReviewData';
 export type DropdownSettingKey = 'leechAction';
 
 export interface NumberSettingSpec {
@@ -212,6 +212,17 @@ export const SETTINGS_GROUPS: SettingGroupSpec[] = [
 				key: 'fuzz',
 				name: 'Interval fuzz',
 				desc: 'Add deterministic jitter to day intervals to avoid review spikes.',
+			},
+		],
+	},
+	{
+		heading: 'Editor',
+		items: [
+			{
+				kind: 'toggle',
+				key: 'compactReviewData',
+				name: 'Compact review data lines',
+				desc: 'Collapse the hidden fc-srs comment below reviewed cards to a small badge in Live Preview. Place the cursor on the line to edit it. Other HTML comments are untouched.',
 			},
 		],
 	},

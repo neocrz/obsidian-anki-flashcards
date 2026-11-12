@@ -3,6 +3,14 @@
 All notable changes to this project are documented here. Format based on Keep a Changelog; versions
 follow SemVer.
 
+## [Unreleased]
+
+### Added
+
+- Optional (on by default) compaction of review-data comments in Live Preview: `fc-srs` lines
+  collapse to a small badge, and reveal the raw line when the cursor touches it. Only this plugin's
+  comments are affected; Source mode and other HTML comments are unchanged.
+
 ## [0.1.0] - 2026-11-11
 
 ### Added
